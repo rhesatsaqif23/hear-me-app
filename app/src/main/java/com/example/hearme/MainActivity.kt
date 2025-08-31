@@ -7,10 +7,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.hearme.data.repository.AuthRepositoryImpl
+import com.example.hearme.domain.usecase.AuthUseCase
+import com.example.hearme.presentation.auth.AuthViewModel
+import com.example.hearme.presentation.auth.LoginScreen
+import com.example.hearme.presentation.auth.RegisterScreen
+import com.example.hearme.presentation.dashboard.DashboardScreen
 import com.example.hearme.ui.theme.HearMeTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +26,38 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HearMeTheme {
+                val navController = rememberNavController()
+
+                // Inisiasi AuthViewModel pakai factory
+                val authRepo = AuthRepositoryImpl()
+                val authUseCase = AuthUseCase(authRepo)
+                val authViewModel: AuthViewModel =
+                    viewModel(factory = AuthViewModel.Factory(authUseCase))
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    NavHost(
+                        navController = navController,
+                        startDestination = "register",
                         modifier = Modifier.padding(innerPadding)
-                    )
+                    ) {
+                        composable("login") {
+                            LoginScreen(
+                                viewModel = authViewModel,
+                                navController = navController
+                            )
+                        }
+                        composable("register") {
+                            RegisterScreen(
+                                viewModel = authViewModel,
+                                navController = navController
+                            )
+                        }
+                        composable("dashboard") {
+                            DashboardScreen()
+                        }
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    HearMeTheme {
-        Greeting("Android")
     }
 }

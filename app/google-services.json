@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "496202275057",
+    "project_id": "hearme-5978a",
+    "storage_bucket": "hearme-5978a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496202275057:android:b3e8f3dfdbcb62d4327150",
+        "android_client_info": {
+          "package_name": "com.example.hearme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "496202275057-r1bvk7bpigqf0qfo9qs5p6esimuarn0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUs6lf0X-KVPY4OyN-DLv5G1C1aVxR5mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "496202275057-r1bvk7bpigqf0qfo9qs5p6esimuarn0d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
