@@ -69,7 +69,7 @@ fun LoginScreen(
     LaunchedEffect(isLoggedIn) {
         if (isLoggedIn) {
             Toast.makeText(context, "Login berhasil", Toast.LENGTH_SHORT).show()
-            navController?.navigate("dashboard") {
+            navController?.navigate("dashboard  ") {
                 popUpTo("login") { inclusive = true }
             }
             viewModel.resetIsLoggedIn()

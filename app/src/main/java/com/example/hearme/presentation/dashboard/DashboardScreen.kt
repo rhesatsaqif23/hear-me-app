@@ -2,20 +2,35 @@ package com.example.hearme.presentation.dashboard
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.example.hearme.presentation.navigation.BottomNavBar
 import com.example.hearme.ui.theme.HearMeTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DashboardScreen() {
+fun DashboardScreen(
+    navController: NavController
+) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route ?: "home"
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Dashboard") }
+            )
+        },
+        bottomBar = {
+            BottomNavBar(
+                navController = navController,
+                selectedRoute = currentRoute
             )
         }
     ) { innerPadding ->
@@ -27,9 +42,22 @@ fun DashboardScreen() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Selamat datang di Dashboard 👋", style = MaterialTheme.typography.headlineSmall)
-            Spacer(modifier = Modifier.height(16.dp))
-            Text("Di sini nanti bisa ditambahkan menu navigasi atau ringkasan data.")
+            when (currentRoute) {
+                "home" -> {
+                    Text(
+                        "Selamat datang di Dashboard 👋",
+                        style = MaterialTheme.typography.headlineSmall
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text("Di sini nanti bisa ditambahkan menu navigasi atau ringkasan data.")
+                }
+                "dokter" -> {
+                    Text("Halaman Pesan", style = MaterialTheme.typography.headlineSmall)
+                }
+                "profil" -> {
+                    Text("Halaman Profil", style = MaterialTheme.typography.headlineSmall)
+                }
+            }
         }
     }
 }
@@ -38,6 +66,7 @@ fun DashboardScreen() {
 @Composable
 fun DashboardScreenPreview() {
     HearMeTheme {
-        DashboardScreen()
+        val navController = rememberNavController()
+        DashboardScreen(navController = navController)
     }
 }

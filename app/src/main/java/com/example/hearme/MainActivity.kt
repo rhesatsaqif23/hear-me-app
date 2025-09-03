@@ -52,8 +52,8 @@ class MainActivity : ComponentActivity() {
                                 navController = navController
                             )
                         }
-                        composable("dashboard") {
-                            DashboardScreen()
+                        composable("home") {
+                            DashboardScreen(navController = navController)
                         }
                     }
                 }
