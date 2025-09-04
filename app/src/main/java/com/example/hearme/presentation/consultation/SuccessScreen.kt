@@ -18,7 +18,7 @@ fun SuccessScreen(
     navController: NavController,
     doctor: DoctorDomain,
     consult: ConsultDomain,
-    onBackClick: () -> Unit = {}
+    onBackClick: () -> Unit = { navController.popBackStack() }
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -38,7 +38,9 @@ fun SuccessScreen(
             ) {
                 MainButton(
                     text = "Mulai Chat Dokter",
-                    onClick = { }
+                    onClick = {
+                        navController.navigate("inbox")
+                    }
                 )
             }
         }

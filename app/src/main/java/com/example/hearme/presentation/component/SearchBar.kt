@@ -8,8 +8,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,9 +15,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.text.BasicTextField
 import com.example.hearme.R
 import com.example.hearme.ui.theme.Typography
 import com.example.hearme.ui.theme.VioletLightActive
+import com.example.hearme.ui.theme.grey2
 
 @Composable
 fun SearchBar(
@@ -35,40 +35,38 @@ fun SearchBar(
         Box(
             modifier = Modifier
                 .weight(1f)
+                .height(48.dp)
                 .border(
                     width = 1.dp,
-                    color = Color(0xFF61646B),
+                    color = grey2,
                     shape = RoundedCornerShape(50)
                 )
-                .padding(horizontal = 8.dp)
+                .padding(horizontal = 16.dp, vertical = 4.dp),
+            contentAlignment = Alignment.CenterStart
         ) {
-            TextField(
+            BasicTextField(
                 value = value,
                 onValueChange = onValueChange,
-                placeholder = {
-                    Text(
-                        text = placeholder,
-                        style = Typography.bodyMedium.copy(color = Color.Gray)
-                    )
-                },
                 singleLine = true,
-                shape = RoundedCornerShape(50),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.Transparent,
-                    unfocusedContainerColor = Color.Transparent,
-                    disabledContainerColor = Color.Transparent,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent
-                ),
+                textStyle = Typography.bodyMedium,
+                decorationBox = { innerTextField ->
+                    if (value.isEmpty()) {
+                        Text(
+                            text = placeholder,
+                            style = Typography.bodyMedium.copy(color = grey2)
+                        )
+                    }
+                    innerTextField()
+                },
                 modifier = Modifier.fillMaxWidth()
             )
         }
 
-        Spacer(modifier = Modifier.width(16.dp))
+        Spacer(modifier = Modifier.width(12.dp))
 
         Box(
             modifier = Modifier
-                .size(53.dp)
+                .size(48.dp)
                 .background(VioletLightActive, CircleShape)
                 .clickable { onSearchClick() },
             contentAlignment = Alignment.Center
@@ -77,8 +75,7 @@ fun SearchBar(
                 painter = painterResource(id = R.drawable.ic_search),
                 contentDescription = "Search",
                 tint = Color.Black,
-                modifier = Modifier.size(28.dp)
-
+                modifier = Modifier.size(24.dp)
             )
         }
     }
@@ -91,7 +88,7 @@ fun SearchBarPreview() {
     SearchBar(
         value = text,
         onValueChange = { text = it },
-        placeholder = "search",
+        placeholder = "Cari dokter",
         onSearchClick = {}
     )
 }

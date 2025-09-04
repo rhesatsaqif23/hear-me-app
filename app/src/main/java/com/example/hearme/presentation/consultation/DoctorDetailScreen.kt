@@ -31,8 +31,7 @@ import com.example.hearme.ui.theme.green
 fun DoctorDetailScreen(
     navController: NavController,
     doctor: DoctorDomain,
-    onBackClick: () -> Unit = {},
-    onScheduleClick: () -> Unit = {}
+    onBackClick: () -> Unit = { navController.popBackStack() },
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -45,7 +44,9 @@ fun DoctorDetailScreen(
             ) {
                 MainButton(
                     text = "Jadwalkan Konsultasi",
-                    onClick = onScheduleClick
+                    onClick = {
+                        navController.navigate("schedule")
+                    }
                 )
             }
         }

@@ -1,5 +1,6 @@
 package com.example.hearme.presentation.consultation
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,10 +20,11 @@ import com.example.hearme.presentation.component.TopBar
 import com.example.hearme.ui.theme.Typography
 import kotlinx.coroutines.delay
 
+@SuppressLint("DefaultLocale")
 @Composable
 fun PaymentScreen(
     navController: NavController,
-    onBackClick: () -> Unit = {}
+    onBackClick: () -> Unit = { navController.popBackStack() }
 ) {
     var timeLeft by remember { mutableStateOf(300) } // 5 menit
 
@@ -56,7 +58,9 @@ fun PaymentScreen(
             ) {
                 MainButton(
                     text = "Saya Sudah Membayar",
-                    onClick = { /* TODO: navigate atau handle pembayaran */ }
+                    onClick = {
+                        navController.navigate("success")
+                    }
                 )
             }
         }

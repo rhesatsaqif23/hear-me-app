@@ -10,7 +10,6 @@ import com.example.hearme.R
 
 val plusjakartasans = FontFamily(Font(R.font.plusjakartasans))
 
-
 val Typography = Typography(
     // Body
     bodyLarge = TextStyle(

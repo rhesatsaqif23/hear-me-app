@@ -41,7 +41,14 @@ fun ProfileScreen(
                 Text("Info Pribadi", style = Typography.titleMedium)
                 Spacer(modifier = Modifier.height(2.dp))
 
-                ProfileMenu(icon = R.drawable.ic_profiles, value = "Profil", isTindakan = false)
+                ProfileMenu(
+                    icon = R.drawable.ic_profiles,
+                    value = "Profil",
+                    isTindakan = false,
+                    onClick = {
+                        navController.navigate("editProfile")
+                    }
+                )
             }
 
             // Keamanan
@@ -52,7 +59,9 @@ fun ProfileScreen(
                 ProfileMenu(
                     icon = R.drawable.ic_password,
                     value = "Ubah kata sandi",
-                    isTindakan = false
+                    isTindakan = false, onClick = {
+                        navController.navigate("changePassword")
+                    }
                 )
             }
 

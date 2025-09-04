@@ -93,7 +93,9 @@ fun ConsultationScreen(
                     )
                 },
                 actions = {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = {
+                        navController.navigate("inbox")
+                    }) {
                         Image(
                             painter = painterResource(id = R.drawable.ic_chat),
                             contentDescription = "Chat Icon"
@@ -125,7 +127,9 @@ fun ConsultationScreen(
             items(doctors) { doctor ->
                 DoctorCard(
                     doctor = doctor,
-                    onClick = { }
+                    onClick = {
+                        navController.navigate("doctorDetail")
+                    }
                 )
             }
         }

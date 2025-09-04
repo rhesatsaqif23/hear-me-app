@@ -9,6 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.hearme.R
 import com.example.hearme.presentation.component.AuthInputText
 import com.example.hearme.presentation.component.MainButton
 import com.example.hearme.presentation.component.TopBar
@@ -17,7 +18,7 @@ import com.example.hearme.ui.theme.Typography
 @Composable
 fun ChangePasswordScreen(
     navController: NavController,
-    onBackClick: () -> Unit = {}
+    onBackClick: () -> Unit = { navController.popBackStack() }
 ) {
     var oldPassword by remember { mutableStateOf("") }
     var newPassword by remember { mutableStateOf("") }
@@ -40,7 +41,9 @@ fun ChangePasswordScreen(
             ) {
                 MainButton(
                     text = "Simpan",
-                    onClick = { }
+                    onClick = {
+                        navController.navigate("profile")
+                    }
                 )
             }
         }
@@ -64,24 +67,38 @@ fun ChangePasswordScreen(
             Spacer(modifier = Modifier.height(2.dp))
 
             Text(
-                text = "Password Lama",
+                text = "Kata Sandi Lama",
                 style = Typography.bodyLarge
             )
             AuthInputText(
                 value = oldPassword,
                 onValueChange = { oldPassword = it },
-                placeholder = "Masukkan kata sandi",
+                placeholder = "Masukkan kata sandi lama",
+                icon = R.drawable.ic_password,
                 isPassword = true
             )
 
             Text(
-                text = "Password Baru",
+                text = "Kata Sandi Baru",
                 style = Typography.bodyLarge
             )
             AuthInputText(
                 value = newPassword,
                 onValueChange = { newPassword = it },
-                placeholder = "Masukkan kata sandi",
+                placeholder = "Masukkan kata sandi baru",
+                icon = R.drawable.ic_password,
+                isPassword = true
+            )
+
+            Text(
+                text = "Konfirmasi Kata Sandi",
+                style = Typography.bodyLarge
+            )
+            AuthInputText(
+                value = newPassword,
+                onValueChange = { newPassword = it },
+                placeholder = "Konfirmasi kata sandi baru",
+                icon = R.drawable.ic_password,
                 isPassword = true
             )
         }

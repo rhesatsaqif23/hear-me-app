@@ -22,10 +22,9 @@ import com.example.hearme.presentation.component.TopBar
 @Composable
 fun EditProfileScreen(
     navController: NavController,
-    onBackClick: () -> Unit = {}
+    onBackClick: () -> Unit = { navController.popBackStack() }
 ) {
     var nama by remember { mutableStateOf("") }
-    var tanggalLahir by remember { mutableStateOf("") }
     var jenisKelamin by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var noTelp by remember { mutableStateOf("") }
@@ -48,7 +47,9 @@ fun EditProfileScreen(
             ) {
                 MainButton(
                     text = "Simpan",
-                    onClick = { }
+                    onClick = {
+                        navController.navigate("profile")
+                    }
                 )
             }
         }
@@ -77,19 +78,14 @@ fun EditProfileScreen(
                 onValueChange = { nama = it }
             )
             ProfileInputText(
-                label = "Tanggal Lahir",
-                value = tanggalLahir,
-                onValueChange = { tanggalLahir = it }
+                label = "Email",
+                value = email,
+                onValueChange = { email = it }
             )
             ProfileInputText(
                 label = "Jenis Kelamin",
                 value = jenisKelamin,
                 onValueChange = { jenisKelamin = it }
-            )
-            ProfileInputText(
-                label = "Email",
-                value = email,
-                onValueChange = { email = it }
             )
             ProfileInputText(
                 label = "Nomor Telepon",

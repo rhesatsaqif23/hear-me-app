@@ -1,5 +1,6 @@
 package com.example.hearme.presentation.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -17,11 +18,13 @@ import com.example.hearme.ui.theme.Typography
 fun ProfileMenu(
     icon: Int,
     value: String,
-    isTindakan: Boolean
+    isTindakan: Boolean,
+    onClick: () -> Unit = {}
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onClick() }
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween

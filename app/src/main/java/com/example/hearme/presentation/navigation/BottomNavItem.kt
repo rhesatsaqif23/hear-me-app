@@ -14,7 +14,7 @@ sealed class BottomNavItem(
     )
 
     object Analysis : BottomNavItem(
-        route = "analysis",
+        route = "voiceRecord",
         iconOn = R.drawable.ic_grid_on,
         iconOff = R.drawable.ic_grid_off
     )

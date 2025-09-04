@@ -25,7 +25,7 @@ import com.example.hearme.ui.theme.Typography
 fun ScheduleScreen(
     navController: NavController,
     doctor: DoctorDomain,
-    onBackClick: () -> Unit = {}
+    onBackClick: () -> Unit = {navController.popBackStack()}
 ) {
     var selectedDate by remember { mutableStateOf("Hari ini") }
     var selectedTime by remember { mutableStateOf("09.00") }
@@ -48,8 +48,10 @@ fun ScheduleScreen(
                     .padding(20.dp)
             ) {
                 MainButton(
-                    text = "Chat Dokter",
-                    onClick = {}
+                    text = "Lanjut Pembayaran",
+                    onClick = {
+                        navController.navigate("payment")
+                    }
                 )
             }
         }
@@ -61,13 +63,11 @@ fun ScheduleScreen(
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            // Dokter
             DoctorCardHorizontal(
                 doctor = doctor,
                 onClick = {}
             )
 
-            // Pilih tanggal konsultasi
             Text("Pilih tanggal konsultasi", style = Typography.titleSmall)
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -83,7 +83,6 @@ fun ScheduleScreen(
                 }
             }
 
-            // Pilih waktu konsultasi
             Text("Pilih waktu konsultasi", style = Typography.titleSmall)
             val times = listOf("09.00", "10.00", "11.00", "12.00", "13.00", "14.00", "15.00")
             FlowRow(
@@ -101,7 +100,6 @@ fun ScheduleScreen(
                 }
             }
 
-            // Pilih metode pembayaran
             Text("Pilih metode pembayaran", style = Typography.titleSmall)
             Row(
                 modifier = Modifier

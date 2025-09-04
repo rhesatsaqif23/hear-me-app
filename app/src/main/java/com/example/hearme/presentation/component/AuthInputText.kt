@@ -14,12 +14,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hearme.ui.theme.Typography
 import com.example.hearme.ui.theme.grey2
+import com.example.hearme.R
 
 @Composable
 fun AuthInputText(
@@ -27,6 +30,7 @@ fun AuthInputText(
     onValueChange: (String) -> Unit,
     placeholder: String,
     modifier: Modifier = Modifier,
+    icon: Int,
     isPassword: Boolean = false
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
@@ -47,6 +51,15 @@ fun AuthInputText(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
+            Icon(
+                painter = painterResource(id = icon),
+                contentDescription = null,
+                tint = grey2,
+                modifier = Modifier
+                    .size(32.dp)
+                    .padding(end = 12.dp)
+            )
+
             BasicTextField(
                 value = value,
                 onValueChange = onValueChange,
@@ -69,10 +82,12 @@ fun AuthInputText(
                 modifier = Modifier.weight(1f)
             )
 
+            // Password toggle icon
             if (isPassword) {
                 IconButton(onClick = { passwordVisible = !passwordVisible }) {
                     Icon(
-                        imageVector = if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
+                        imageVector = if (passwordVisible) Icons.Default.Visibility
+                        else Icons.Default.VisibilityOff,
                         contentDescription = if (passwordVisible) "Hide password" else "Show password",
                         tint = grey2
                     )
@@ -89,14 +104,17 @@ fun AuthInputTextPreview() {
         AuthInputText(
             value = "",
             onValueChange = {},
-            placeholder = "Email"
+            placeholder = "Email",
+            icon = R.drawable.ic_email
         )
         Spacer(modifier = Modifier.height(16.dp))
         AuthInputText(
             value = "",
             onValueChange = {},
             placeholder = "Password",
+            icon = R.drawable.ic_password,
             isPassword = true
         )
     }
 }
+

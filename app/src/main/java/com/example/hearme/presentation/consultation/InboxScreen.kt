@@ -18,7 +18,7 @@ import com.example.hearme.presentation.component.TopBar
 @Composable
 fun InboxScreen(
     navController: NavController,
-    onBackClick: () -> Unit = {}
+    onBackClick: () -> Unit = { navController.popBackStack() }
 ) {
     var searchValue by remember { mutableStateOf("") }
 
@@ -39,17 +39,15 @@ fun InboxScreen(
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
-            // Search bar
             SearchBar(
                 value = searchValue,
                 onValueChange = { searchValue = it },
-                placeholder = "search",
+                placeholder = "Cari dokter",
                 onSearchClick = { }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Dummy chat list
             val dummyDoctor = DoctorDomain(
                 did = "1",
                 dName = "dr. Tirta, S.Psi",

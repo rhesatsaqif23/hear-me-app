@@ -22,17 +22,23 @@ fun SwitchMethod(
     defaultSelected: Boolean = false,
     onMethodSelected: (String) -> Unit = {}
 ) {
-    var isQuestionnaireSelected by remember { mutableStateOf(defaultSelected) }
+    var selectedMethod by remember {
+        mutableStateOf(if (defaultSelected) "question" else "voiceRecord")
+    }
+
+    val containerWidth = 280.dp
+    val padding = 5.dp
+    val itemWidth = (containerWidth - (padding * 2)) / 2
 
     val switchOffset by animateDpAsState(
-        targetValue = if (isQuestionnaireSelected) 150.dp else 0.dp,
+        targetValue = if (selectedMethod == "question") itemWidth else 0.dp,
         animationSpec = tween(durationMillis = 300),
         label = "switchOffset"
     )
 
     Box(
         modifier = modifier
-            .width(280.dp)
+            .width(containerWidth)
             .height(45.dp)
             .background(
                 color = VioletLightActive,
@@ -42,7 +48,7 @@ fun SwitchMethod(
     ) {
         Box(
             modifier = Modifier
-                .width(140.dp)
+                .width(itemWidth)
                 .height(36.dp)
                 .offset(x = switchOffset)
                 .background(VioletLight, RoundedCornerShape(50))
@@ -54,15 +60,15 @@ fun SwitchMethod(
                     .weight(1f)
                     .fillMaxHeight()
                     .clickable {
-                        isQuestionnaireSelected = false
-                        onMethodSelected("Rekam Suara")
+                        selectedMethod = "voiceRecord"
+                        onMethodSelected(selectedMethod)
                     },
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = "Rekam Suara",
                     style = Typography.bodyLarge,
-                    color = if (!isQuestionnaireSelected) VioletNormalActive else VioletLight
+                    color = if (selectedMethod == "voiceRecord") VioletNormalActive else VioletLight
                 )
             }
 
@@ -71,20 +77,21 @@ fun SwitchMethod(
                     .weight(1f)
                     .fillMaxHeight()
                     .clickable {
-                        isQuestionnaireSelected = true
-                        onMethodSelected("Kuesioner")
+                        selectedMethod = "question"
+                        onMethodSelected(selectedMethod)
                     },
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = "Kuesioner",
                     style = Typography.bodyLarge,
-                    color = if (isQuestionnaireSelected) VioletNormalActive else VioletLight
+                    color = if (selectedMethod == "question") VioletNormalActive else VioletLight
                 )
             }
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
