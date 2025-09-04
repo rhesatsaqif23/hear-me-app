@@ -30,8 +30,8 @@ fun TimeButton(
 
     Box(
         modifier = Modifier
-            .width(60.dp)
-            .height(30.dp)
+            .width(75.dp)
+            .height(35.dp)
             .border(
                 width = 1.dp,
                 color = borderColor,

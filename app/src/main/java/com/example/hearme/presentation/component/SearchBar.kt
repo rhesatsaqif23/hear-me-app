@@ -48,7 +48,7 @@ fun SearchBar(
                 placeholder = {
                     Text(
                         text = placeholder,
-                        style = Typography.labelLarge.copy(color = Color.Gray)
+                        style = Typography.bodyMedium.copy(color = Color.Gray)
                     )
                 },
                 singleLine = true,

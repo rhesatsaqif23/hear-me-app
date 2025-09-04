@@ -1,58 +1,102 @@
 package com.example.hearme.presentation.component
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.hearme.ui.theme.Typography
+import com.example.hearme.ui.theme.grey2
 
 @Composable
 fun AuthInputText(
     value: String,
     onValueChange: (String) -> Unit,
     placeholder: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isPassword: Boolean = false
 ) {
-    TextField(
-        value = value,
-        onValueChange = onValueChange,
-        placeholder = {
-            Text(
-                placeholder,
-                style = MaterialTheme.typography.bodyLarge.copy(color = Color.Gray)
-            )
-        },
-        singleLine = true,
-        shape = RoundedCornerShape(16.dp),
-        colors = TextFieldDefaults.colors(
-            focusedContainerColor = Color.White,
-            unfocusedContainerColor = Color.White,
-            disabledContainerColor = Color.White,
-            errorContainerColor = Color.White,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent,
-            errorIndicatorColor = Color.Transparent,
-            focusedTextColor = Color.Black,
-            unfocusedTextColor = Color.Black
-        ),
-        textStyle = MaterialTheme.typography.bodyLarge.copy(color = Color.Black),
+    var passwordVisible by remember { mutableStateOf(false) }
+
+    Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
-    )
+            .height(48.dp)
+            .border(
+                width = 1.dp,
+                color = grey2,
+                shape = RoundedCornerShape(50)
+            )
+            .padding(horizontal = 16.dp, vertical = 4.dp),
+        contentAlignment = Alignment.CenterStart
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            BasicTextField(
+                value = value,
+                onValueChange = onValueChange,
+                singleLine = true,
+                textStyle = Typography.bodyMedium.copy(color = Color.Black),
+                visualTransformation = if (isPassword && !passwordVisible) {
+                    PasswordVisualTransformation()
+                } else {
+                    VisualTransformation.None
+                },
+                decorationBox = { innerTextField ->
+                    if (value.isEmpty()) {
+                        Text(
+                            text = placeholder,
+                            style = Typography.bodyMedium.copy(color = grey2)
+                        )
+                    }
+                    innerTextField()
+                },
+                modifier = Modifier.weight(1f)
+            )
+
+            if (isPassword) {
+                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                    Icon(
+                        imageVector = if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
+                        contentDescription = if (passwordVisible) "Hide password" else "Show password",
+                        tint = grey2
+                    )
+                }
+            }
+        }
+    }
 }
 
-@Preview(showBackground = false)
+@Preview(showBackground = true)
 @Composable
 fun AuthInputTextPreview() {
-    AuthInputText(
-        value = "",
-        onValueChange = {},
-        placeholder = "Enter your email"
-    )
+    Column(Modifier.padding(16.dp)) {
+        AuthInputText(
+            value = "",
+            onValueChange = {},
+            placeholder = "Email"
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        AuthInputText(
+            value = "",
+            onValueChange = {},
+            placeholder = "Password",
+            isPassword = true
+        )
+    }
 }

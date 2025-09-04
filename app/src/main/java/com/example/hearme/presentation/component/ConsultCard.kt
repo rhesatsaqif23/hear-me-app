@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,12 +37,7 @@ fun ConsultCard(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .shadow(
-                elevation = 8.dp,
-                spotColor = Color(0x40000000),
-                ambientColor = Color(0x40000000),
-                shape = RoundedCornerShape(12.dp)
-            )
+            .shadow(elevation = 6.dp, shape = RoundedCornerShape(10.dp))
             .clip(RoundedCornerShape(12.dp))
             .background(Color.White)
             .clickable { onClick() }
@@ -54,6 +50,7 @@ fun ConsultCard(
 //        AsyncImage(
 //            model = doctor.photo,
 //            contentDescription = "Foto Dokter",
+//            contentScale = ContentScale.Crop,
 //            modifier = Modifier
 //                .size(90.dp)
 //                .clip(RoundedCornerShape(8.dp))
@@ -62,6 +59,7 @@ fun ConsultCard(
             Image(
                 painter = painterResource(id = R.drawable.doctor_placeholder),
                 contentDescription = "Foto Dokter",
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(90.dp)
                     .clip(RoundedCornerShape(16.dp))

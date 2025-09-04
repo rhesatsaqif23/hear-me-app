@@ -12,6 +12,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.hearme.presentation.navigation.BottomNavBar
 import com.example.hearme.ui.theme.HearMeTheme
+import com.example.hearme.ui.theme.Typography
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,16 +47,16 @@ fun DashboardScreen(
                 "home" -> {
                     Text(
                         "Selamat datang di Dashboard 👋",
-                        style = MaterialTheme.typography.headlineSmall
+                        style = Typography.headlineSmall
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Text("Di sini nanti bisa ditambahkan menu navigasi atau ringkasan data.")
                 }
                 "dokter" -> {
-                    Text("Halaman Pesan", style = MaterialTheme.typography.headlineSmall)
+                    Text("Halaman Pesan", style = Typography.headlineSmall)
                 }
                 "profil" -> {
-                    Text("Halaman Profil", style = MaterialTheme.typography.headlineSmall)
+                    Text("Halaman Profil", style = Typography.headlineSmall)
                 }
             }
         }

@@ -32,7 +32,7 @@ fun SwitchMethod(
 
     Box(
         modifier = modifier
-            .width(250.dp)
+            .width(280.dp)
             .height(45.dp)
             .background(
                 color = VioletLightActive,
@@ -42,7 +42,7 @@ fun SwitchMethod(
     ) {
         Box(
             modifier = Modifier
-                .width(125.dp)
+                .width(140.dp)
                 .height(36.dp)
                 .offset(x = switchOffset)
                 .background(VioletLight, RoundedCornerShape(50))

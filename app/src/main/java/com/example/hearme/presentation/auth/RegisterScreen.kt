@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.hearme.presentation.component.AuthInputText
+import com.example.hearme.ui.theme.Typography
 
 @Composable
 fun RegisterScreen(
@@ -38,7 +39,7 @@ fun RegisterScreen(
     ) {
         Text(
             text = "Register",
-            style = MaterialTheme.typography.titleLarge
+            style = Typography.titleLarge
         )
 
         AuthInputText(
@@ -83,7 +84,7 @@ fun RegisterScreen(
         if (errorMessage != null) {
             Text(
                 text = errorMessage ?: "",
-                style = MaterialTheme.typography.bodySmall,
+                style = Typography.bodySmall,
                 color = MaterialTheme.colorScheme.error
             )
         }

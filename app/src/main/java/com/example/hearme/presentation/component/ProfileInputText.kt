@@ -3,17 +3,20 @@ package com.example.hearme.presentation.component
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hearme.ui.theme.Typography
+import com.example.hearme.ui.theme.grey2
 
 @Composable
 fun ProfileInputText(
@@ -36,31 +39,29 @@ fun ProfileInputText(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(48.dp)
                 .border(
                     width = 1.dp,
-                    color = Color(0xFF61646B),
+                    color = grey2,
                     shape = RoundedCornerShape(50)
                 )
-                .padding(horizontal = 8.dp)
+                .padding(horizontal = 16.dp, vertical = 4.dp),
+            contentAlignment = Alignment.CenterStart
         ) {
-            TextField(
+            BasicTextField(
                 value = value,
                 onValueChange = onValueChange,
-                placeholder = {
-                    Text(
-                        text = placeholder,
-                        style = Typography.labelLarge.copy(color = Color.Gray)
-                    )
-                },
                 singleLine = true,
-                shape = RoundedCornerShape(50),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.Transparent,
-                    unfocusedContainerColor = Color.Transparent,
-                    disabledContainerColor = Color.Transparent,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent
-                ),
+                textStyle = Typography.bodyMedium,
+                decorationBox = { innerTextField ->
+                    if (value.isEmpty()) {
+                        Text(
+                            text = placeholder,
+                            style = Typography.bodyMedium.copy(color = grey2)
+                        )
+                    }
+                    innerTextField()
+                },
                 modifier = Modifier.fillMaxWidth()
             )
         }

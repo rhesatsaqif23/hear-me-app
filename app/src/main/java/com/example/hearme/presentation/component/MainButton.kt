@@ -9,7 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hearme.ui.theme.HearMeTheme
-import com.example.hearme.ui.theme.primary
+import com.example.hearme.ui.theme.Typography
+import com.example.hearme.ui.theme.violetNormal
 
 @Composable
 fun MainButton(
@@ -21,14 +22,14 @@ fun MainButton(
             .fillMaxWidth()
             .height(50.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = primary
+            containerColor = violetNormal
         ),
         shape = RoundedCornerShape(50.dp),
         onClick = onClick
     ) {
         Text(
             text = text,
-            style = MaterialTheme.typography.titleSmall.copy(
+            style = Typography.titleSmall.copy(
                 color = MaterialTheme.colorScheme.onPrimary
             )
         )

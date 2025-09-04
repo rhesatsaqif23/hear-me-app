@@ -24,11 +24,7 @@ fun BottomNavBar(
 ) {
     Box(
         modifier = Modifier
-            .shadow(
-                elevation = 20.dp,
-                spotColor = Color(0x40000000),
-                ambientColor = Color(0x40000000)
-            )
+            .shadow(elevation = 6.dp, shape = RoundedCornerShape(topStart = 25.dp, topEnd = 25.dp))
             .fillMaxWidth()
             .height(80.dp)
             .background(
@@ -91,6 +87,6 @@ fun BottomNavBarPreview() {
     val navController = rememberNavController()
     BottomNavBar(
         navController = navController,
-        selectedRoute = "home"
+        selectedRoute = "dashboard"
     )
 }

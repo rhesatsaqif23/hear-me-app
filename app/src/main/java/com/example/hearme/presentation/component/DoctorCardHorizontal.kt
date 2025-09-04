@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,12 +36,7 @@ fun DoctorCardHorizontal(
         modifier = modifier
             .fillMaxWidth()
             .height(100.dp)
-            .shadow(
-                elevation = 8.dp,
-                spotColor = Color(0x40000000),
-                ambientColor = Color(0x40000000),
-                shape = RoundedCornerShape(10.dp)
-            )
+            .shadow(elevation = 6.dp, shape = RoundedCornerShape(10.dp))
             .clip(RoundedCornerShape(10.dp))
             .background(Color.White)
             .clickable { onClick() }
@@ -50,6 +46,7 @@ fun DoctorCardHorizontal(
 //        AsyncImage(
 //            model = doctor.photo,
 //            contentDescription = "Foto Dokter",
+//            contentScale = ContentScale.Crop,
 //            modifier = Modifier
 //                .size(90.dp)
 //                .clip(RoundedCornerShape(8.dp))
@@ -58,9 +55,10 @@ fun DoctorCardHorizontal(
         Image(
             painter = painterResource(id = R.drawable.doctor_placeholder),
             contentDescription = "Foto Dokter",
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(90.dp)
-                .clip(RoundedCornerShape(16.dp))
+                .clip(RoundedCornerShape(8.dp))
         )
 
         Spacer(modifier = Modifier.width(8.dp))

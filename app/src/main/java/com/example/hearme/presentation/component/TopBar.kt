@@ -20,7 +20,8 @@ import com.example.hearme.ui.theme.VioletLightActive
 @Composable
 fun TopBar(
     title: String,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    modifier: Modifier
 ) {
     Row(
         modifier = Modifier
@@ -30,7 +31,7 @@ fun TopBar(
     ) {
         Box(
             modifier = Modifier
-                .size(50.dp)
+                .size(36.dp)
                 .background(VioletLightActive, CircleShape)
                 .clickable { onBackClick() },
             contentAlignment = Alignment.Center
@@ -39,7 +40,7 @@ fun TopBar(
                 painter = painterResource(id = R.drawable.ic_back),
                 contentDescription = "Back",
                 tint = Color.Black,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(20.dp)
             )
         }
 
@@ -58,6 +59,7 @@ fun TopBar(
 fun TopBarPreview() {
     TopBar(
         title = "Jadwalkan Konsultasi",
-        onBackClick = {}
+        onBackClick = {},
+        modifier = Modifier
     )
 }

@@ -21,6 +21,7 @@ import com.example.hearme.R
 import com.example.hearme.domain.model.DoctorDomain
 import com.example.hearme.ui.theme.Typography
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import com.example.hearme.ui.theme.green
 
 @Composable
@@ -31,14 +32,9 @@ fun DoctorCard(
 ) {
     Column(
         modifier = modifier
-            .width(140.dp)
+            .width(150.dp)
             .height(210.dp)
-            .shadow(
-                elevation = 8.dp,
-                spotColor = Color(0x40000000),
-                ambientColor = Color(0x40000000),
-                shape = RoundedCornerShape(10.dp)
-            )
+            .shadow(elevation = 6.dp, shape = RoundedCornerShape(10.dp))
             .clip(RoundedCornerShape(10.dp))
             .background(Color.White)
             .clickable { onClick() }
@@ -46,14 +42,17 @@ fun DoctorCard(
 //        AsyncImage(
 //            model = doctor.photo,
 //            contentDescription = "Foto Dokter",
+//            contentScale = ContentScale.Crop,
 //            modifier = Modifier
 //                .fillMaxWidth()
 //                .height(130.dp)
 //                .clip(RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp))
 //        )
+
         Image(
             painter = painterResource(id = R.drawable.doctor_placeholder),
             contentDescription = "Foto Dokter",
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(140.dp)
@@ -108,7 +107,7 @@ fun DoctorCard(
 
                     Text(
                         text = doctor.city,
-                        style = Typography.labelSmall,
+                        style = Typography.labelMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )

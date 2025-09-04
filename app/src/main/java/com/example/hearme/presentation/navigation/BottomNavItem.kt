@@ -7,41 +7,41 @@ sealed class BottomNavItem(
     val iconOn: Int,
     val iconOff: Int
 ) {
-    object Home : BottomNavItem(
-        route = "home",
+    object Dashboard : BottomNavItem(
+        route = "dashboard",
         iconOn = R.drawable.ic_home_on,
         iconOff = R.drawable.ic_home_off
     )
 
-    object Fitur : BottomNavItem(
-        route = "fitur",
+    object Analysis : BottomNavItem(
+        route = "analysis",
         iconOn = R.drawable.ic_grid_on,
         iconOff = R.drawable.ic_grid_off
     )
 
-    object Dokter : BottomNavItem(
-        route = "dokter",
+    object Consultation : BottomNavItem(
+        route = "consultation",
         iconOn = R.drawable.ic_doctor_on,
         iconOff = R.drawable.ic_doctor_off
     )
 
-    object Latihan : BottomNavItem(
-        route = "latihan",
+    object Exercise : BottomNavItem(
+        route = "exercise",
         iconOn = R.drawable.ic_exercise_on,
         iconOff = R.drawable.ic_exercise_off
     )
 
-    object Profil : BottomNavItem(
-        route = "profil",
+    object Profile : BottomNavItem(
+        route = "profile",
         iconOn = R.drawable.ic_settings_on,
         iconOff = R.drawable.ic_settings_off
     )
 }
 
 val bottomNavItems = listOf(
-    BottomNavItem.Home,
-    BottomNavItem.Fitur,
-    BottomNavItem.Dokter,
-    BottomNavItem.Latihan,
-    BottomNavItem.Profil
+    BottomNavItem.Dashboard,
+    BottomNavItem.Analysis,
+    BottomNavItem.Consultation,
+    BottomNavItem.Exercise,
+    BottomNavItem.Profile
 )
