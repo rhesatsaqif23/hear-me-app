@@ -8,7 +8,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -27,10 +30,12 @@ import com.example.hearme.ui.theme.HearMeTheme
 import com.example.hearme.ui.theme.Typography
 import com.example.hearme.ui.theme.VioletNormal
 import com.example.hearme.R
+import com.example.hearme.domain.usecase.AuthUseCase
 
 @Composable
 fun DashboardScreen(
-    navController: NavController
+    navController: NavController,
+    authUseCase: AuthUseCase
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = "dashboard"
@@ -57,8 +62,16 @@ fun DashboardScreen(
                 .padding(horizontal = 20.dp)
                 .verticalScroll(rememberScrollState())
         ) {
+            val userName = remember { mutableStateOf("Pengguna") }
+
+            LaunchedEffect(Unit) {
+                authUseCase.getUserName { name ->
+                    userName.value = name
+                }
+            }
+
             TopBarHome(
-                name = "Jane Doe",
+                name = userName.value,
                 notificationCount = 0
             )
 
@@ -197,11 +210,11 @@ fun DashboardScreen(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DashboardScreenPreview() {
-    HearMeTheme {
-        val navController = rememberNavController()
-        DashboardScreen(navController = navController)
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DashboardScreenPreview() {
+//    HearMeTheme {
+//        val navController = rememberNavController()
+//        DashboardScreen(navController = navController)
+//    }
+//}

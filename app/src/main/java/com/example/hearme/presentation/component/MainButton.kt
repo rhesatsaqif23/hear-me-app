@@ -15,7 +15,8 @@ import com.example.hearme.ui.theme.violetNormal
 @Composable
 fun MainButton(
     text: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    enabled: Boolean = true
 ) {
     Button(
         modifier = Modifier

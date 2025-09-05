@@ -28,9 +28,9 @@ fun StressCard(
     modifier: Modifier = Modifier
 ) {
     val (circleColor, iconRes) = when (stress.level.lowercase()) {
-        "ringan" -> Color(0xFFFFC107) to R.drawable.stress_ringan // kuning
+        "rendah" -> Color(0xFFFFC107) to R.drawable.stress_ringan // kuning
         "sedang" -> Color(0xFFFF9800) to R.drawable.stress_sedang // oranye
-        "berat" -> Color(0xFFF44336) to R.drawable.stress_berat   // merah
+        "tinggi" -> Color(0xFFF44336) to R.drawable.stress_berat // merah
         else -> Color(0xFF9E9E9E) to R.drawable.stress_ringan
     }
 
@@ -101,7 +101,7 @@ fun StressCard(
 fun StressCardPreview() {
     HearMeTheme {
         StressCard(
-            stress = StressData(level = "sedang")
+            stress = StressData(level = "tinggi")
         )
     }
 }

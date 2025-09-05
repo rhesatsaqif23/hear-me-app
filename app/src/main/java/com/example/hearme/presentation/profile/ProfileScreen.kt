@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hearme.R
+import com.example.hearme.domain.usecase.AuthUseCase
 import com.example.hearme.presentation.component.ProfileMenu
 import com.example.hearme.presentation.navigation.BottomNavBar
 import com.example.hearme.ui.theme.Typography
@@ -17,6 +18,7 @@ import com.example.hearme.ui.theme.Typography
 @Composable
 fun ProfileScreen(
     navController: NavController,
+    authUseCase: AuthUseCase,
     currentRoute: String = "profile"
 ) {
     Scaffold(
@@ -87,16 +89,26 @@ fun ProfileScreen(
                 Text("Tindakan", style = Typography.titleMedium)
                 Spacer(modifier = Modifier.height(2.dp))
 
-                ProfileMenu(icon = R.drawable.ic_logout, value = "Keluar", isTindakan = true)
+                ProfileMenu(
+                    icon = R.drawable.ic_logout,
+                    value = "Keluar",
+                    isTindakan = true,
+                    onClick = {
+                        authUseCase.logoutUser()
+                        navController.navigate("login") {
+                            popUpTo(0)
+                        }
+                    }
+                )
                 ProfileMenu(icon = R.drawable.ic_delete, value = "Hapus Akun", isTindakan = true)
             }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ProfileScreenPreview() {
-    val navController = rememberNavController()
-    ProfileScreen(navController)
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun ProfileScreenPreview() {
+//    val navController = rememberNavController()
+//    ProfileScreen(navController)
+//}

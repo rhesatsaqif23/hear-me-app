@@ -125,6 +125,13 @@ fun PaymentScreen(
                     style = Typography.bodyLarge.copy(color = Color.Red)
                 )
             }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = "Total: Rp30.000",
+                style = Typography.titleMedium
+            )
         }
     }
 }

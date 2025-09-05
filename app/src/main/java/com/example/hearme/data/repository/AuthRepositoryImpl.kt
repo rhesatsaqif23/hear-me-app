@@ -1,16 +1,20 @@
 package com.example.hearme.data.repository
 
 import android.util.Log
+import com.example.hearme.data.mapper.UserMapper
 import com.example.hearme.data.model.UserData
 import com.example.hearme.data.source.firebase.FirebaseService
+import com.example.hearme.domain.model.UserDomain
 import com.example.hearme.domain.repository.AuthRepository
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 class AuthRepositoryImpl : AuthRepository {
 
     private val auth = FirebaseService.auth
     private val db = FirebaseService.db
 
-    // Registrasi user baru
     override fun register(
         name: String,
         email: String,
@@ -31,8 +35,8 @@ class AuthRepositoryImpl : AuthRepository {
                             uid = userId,
                             name = name,
                             email = email,
-                            phoneNumber = phoneNumber,
-                            gender = gender
+                            phoneNumber = phoneNumber.ifBlank { "" },
+                            gender = gender.ifBlank { "" }
                         )
 
                         userRef.setValue(userData)
@@ -53,7 +57,6 @@ class AuthRepositoryImpl : AuthRepository {
             }
     }
 
-    // Login user
     override fun login(email: String, password: String, onResult: (Boolean, String?) -> Unit) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
@@ -68,7 +71,6 @@ class AuthRepositoryImpl : AuthRepository {
             }
     }
 
-    // Cek password user (re-authenticate)
     override fun checkPassword(password: String, onResult: (Boolean) -> Unit) {
         val email = auth.currentUser?.email
         if (email != null) {
@@ -81,12 +83,10 @@ class AuthRepositoryImpl : AuthRepository {
         }
     }
 
-    // Logout user
     override fun logout() {
         auth.signOut()
     }
 
-    // Reset password
     override fun resetPassword(email: String, onResult: (Boolean, String?) -> Unit) {
         auth.sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->
@@ -98,7 +98,30 @@ class AuthRepositoryImpl : AuthRepository {
             }
     }
 
-    // Mapping pesan error
+    override fun getCurrentUserId(): String? {
+        return auth.currentUser?.uid
+    }
+
+    override fun getUserData(uid: String, onResult: (UserDomain?) -> Unit) {
+        val userRef = db.getReference("users").child(uid)
+
+        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val user = UserMapper.mapFromSnapshot(snapshot)
+                    onResult(user)
+                } else {
+                    onResult(null)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("AuthRepositoryImpl", "getUserData cancelled: ${error.message}")
+                onResult(null)
+            }
+        })
+    }
+
     private fun getLocalizedErrorMessage(errorMessage: String?): String {
         return when {
             errorMessage?.contains("The email address is badly formatted") == true ->

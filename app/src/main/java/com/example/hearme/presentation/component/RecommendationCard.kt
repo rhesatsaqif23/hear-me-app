@@ -26,7 +26,7 @@ fun RecommendationCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .height(180.dp)
+            .wrapContentHeight()
             .shadow(elevation = 6.dp, shape = RoundedCornerShape(12.dp)),
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),

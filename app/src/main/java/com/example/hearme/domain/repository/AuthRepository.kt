@@ -1,5 +1,7 @@
 package com.example.hearme.domain.repository
 
+import com.example.hearme.domain.model.UserDomain
+
 interface AuthRepository {
     fun register(
         name: String,
@@ -26,5 +28,11 @@ interface AuthRepository {
     fun resetPassword(
         email: String,
         onResult: (Boolean, String?) -> Unit
+    )
+
+    fun getCurrentUserId(): String?
+    fun getUserData(
+        uid: String,
+        onResult: (UserDomain?) -> Unit
     )
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,7 +20,8 @@ import com.example.hearme.ui.theme.grey2
 @Composable
 fun QuestionSection(
     title: String,
-    questions: List<String>
+    questions: List<String>,
+    onAnswer: (question: String, answer: String) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -28,7 +30,6 @@ fun QuestionSection(
             .fillMaxWidth()
             .padding(vertical = 8.dp)
     ) {
-        // Header
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -46,7 +47,6 @@ fun QuestionSection(
             )
         }
 
-        // Body (expandable)
         AnimatedVisibility(visible = expanded) {
             Column(
                 modifier = Modifier
@@ -55,6 +55,8 @@ fun QuestionSection(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 questions.forEachIndexed { index, question ->
+                    var answer by rememberSaveable { mutableStateOf("") }
+
                     Column {
                         Text(
                             text = "${index + 1}. $question",
@@ -65,7 +67,7 @@ fun QuestionSection(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(80.dp)
+                                .height(50.dp)
                                 .border(
                                     width = 1.dp,
                                     color = grey2,
@@ -73,11 +75,12 @@ fun QuestionSection(
                                 )
                                 .padding(horizontal = 12.dp, vertical = 8.dp),
                         ) {
-                            var answer by remember { mutableStateOf("") }
-
                             BasicTextField(
                                 value = answer,
-                                onValueChange = { answer = it },
+                                onValueChange = {
+                                    answer = it
+                                    onAnswer(question, it)
+                                },
                                 textStyle = Typography.bodyMedium,
                                 modifier = Modifier.fillMaxSize(),
                                 decorationBox = { innerTextField ->
@@ -98,14 +101,14 @@ fun QuestionSection(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun QuestionSectionPreview() {
-    QuestionSection(
-        title = "Pembukaan",
-        questions = listOf(
-            "Bisa ceritakan sedikit tentang bagaimana hari Anda sejauh ini?",
-            "Apa hal pertama yang terlintas ketika mendengar kata 'tenang' atau 'damai'?"
-        )
-    )
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun QuestionSectionPreview() {
+//    QuestionSection(
+//        title = "Pembukaan",
+//        questions = listOf(
+//            "Bisa ceritakan sedikit tentang bagaimana hari Anda sejauh ini?",
+//            "Apa hal pertama yang terlintas ketika mendengar kata 'tenang' atau 'damai'?"
+//        )
+//    )
+//}
