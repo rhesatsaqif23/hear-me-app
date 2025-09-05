@@ -15,6 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hearme.R
+import com.example.hearme.domain.model.ConsultDomain
+import com.example.hearme.domain.model.DoctorDomain
 import com.example.hearme.presentation.component.MainButton
 import com.example.hearme.presentation.component.TopBar
 import com.example.hearme.ui.theme.Typography
@@ -24,9 +26,11 @@ import kotlinx.coroutines.delay
 @Composable
 fun PaymentScreen(
     navController: NavController,
+    doctor: DoctorDomain,
+    consult: ConsultDomain,
     onBackClick: () -> Unit = { navController.popBackStack() }
 ) {
-    var timeLeft by remember { mutableStateOf(300) } // 5 menit
+    var timeLeft by remember { mutableStateOf(300) }
 
     // Countdown effect
     LaunchedEffect(Unit) {
@@ -59,7 +63,9 @@ fun PaymentScreen(
                 MainButton(
                     text = "Saya Sudah Membayar",
                     onClick = {
-                        navController.navigate("success")
+                        navController.navigate(
+                            "success/${doctor.did}/${consult.cid}/${consult.date}/${consult.time}/${consult.payment}"
+                        )
                     }
                 )
             }
@@ -123,9 +129,9 @@ fun PaymentScreen(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewPaymentScreen() {
-    val navController = rememberNavController()
-    PaymentScreen(navController = navController)
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewPaymentScreen() {
+//    val navController = rememberNavController()
+//    PaymentScreen(navController = navController)
+//}

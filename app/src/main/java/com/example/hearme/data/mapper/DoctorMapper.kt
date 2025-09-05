@@ -3,6 +3,7 @@ package com.example.hearme.data.mapper
 import com.example.hearme.data.model.DoctorData
 import com.example.hearme.domain.model.DoctorDomain
 import com.google.firebase.database.DataSnapshot
+import com.example.hearme.R
 
 object DoctorMapper {
     fun mapToDomain(doctorData: DoctorData): DoctorDomain {
@@ -35,7 +36,20 @@ object DoctorMapper {
             education = snapshot.child("education").children.mapNotNull {
                 it.getValue(String::class.java)
             },
-            photo = snapshot.child("photo").getValue(String::class.java) ?: ""
+            photo = getDoctorPhotoResId(
+                snapshot.child("photo").getValue(String::class.java) ?: ""
+            )
         )
     }
+
+    private fun getDoctorPhotoResId(photoKey: String): Int {
+        return when (photoKey) {
+            "doctor1" -> R.drawable.doctor_1
+            "doctor2" -> R.drawable.doctor_2
+            "doctor3" -> R.drawable.doctor_3
+            "doctor4" -> R.drawable.doctor_4
+            else -> R.drawable.doctor_placeholder
+        }
+    }
 }
+

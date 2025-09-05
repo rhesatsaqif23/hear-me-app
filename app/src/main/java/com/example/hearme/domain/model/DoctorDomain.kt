@@ -11,5 +11,5 @@ data class DoctorDomain(
     val address: String = "",
     val city: String = "",
     val education: List<String> = emptyList(),
-    val photo: String = "",
+    val photo: Int = 0,
 )

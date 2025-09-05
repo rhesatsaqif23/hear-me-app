@@ -10,7 +10,7 @@ object ConsultMapper {
         return ConsultDomain(
             cid = consultData.cid,
             did = consultData.did,
-            uid = consultData.uid,
+            dName = consultData.dName,
             date = consultData.date,
             time = consultData.time,
             payment = consultData.payment,
@@ -22,7 +22,7 @@ object ConsultMapper {
         return ConsultDomain(
             cid = snapshot.child("cid").getValue(String::class.java) ?: "",
             did = snapshot.child("did").getValue(String::class.java) ?: "",
-            uid = snapshot.child("uid").getValue(String::class.java) ?: "",
+            dName = snapshot.child("dName").getValue(String::class.java) ?: "",
             date = snapshot.child("date").getValue(String::class.java) ?: "",
             time = snapshot.child("time").getValue(String::class.java) ?: "",
             payment = snapshot.child("payment").getValue(String::class.java) ?: "",

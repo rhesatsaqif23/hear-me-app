@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.hearme.R
 import com.example.hearme.domain.model.DoctorDomain
 import com.example.hearme.presentation.component.ChatListItem
 import com.example.hearme.presentation.component.SearchBar
@@ -18,7 +19,6 @@ import com.example.hearme.presentation.component.TopBar
 @Composable
 fun InboxScreen(
     navController: NavController,
-    onBackClick: () -> Unit = { navController.popBackStack() }
 ) {
     var searchValue by remember { mutableStateOf("") }
 
@@ -28,7 +28,9 @@ fun InboxScreen(
         topBar = {
             TopBar(
                 title = "Kotak Masuk",
-                onBackClick = onBackClick,
+                onBackClick = {
+                    navController.popBackStack("consultation", inclusive = false)
+                },
                 modifier = Modifier
             )
         }
@@ -37,7 +39,7 @@ fun InboxScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .padding(horizontal = 20.dp, vertical = 8.dp)
         ) {
             SearchBar(
                 value = searchValue,
@@ -59,7 +61,7 @@ fun InboxScreen(
                 city = "Jakarta Timur",
                 education = listOf("S1 – Psikologi, Universitas Indonesia"),
                 dPhoneNumber = "08123456789",
-                photo = "https://i.imgur.com/mwL6QF5.jpeg"
+                photo = R.drawable.doctor_1
             )
 
             LazyColumn(

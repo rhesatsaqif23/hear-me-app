@@ -21,12 +21,15 @@ import com.example.hearme.ui.theme.VioletLightActive
 fun TopBar(
     title: String,
     onBackClick: () -> Unit,
-    modifier: Modifier
+    modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(
+                horizontal = 20.dp, vertical = 12.dp
+            )
+            .padding(WindowInsets.statusBars.asPaddingValues()),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(

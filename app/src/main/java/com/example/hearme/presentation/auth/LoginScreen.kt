@@ -12,17 +12,16 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.hearme.R
-import com.example.hearme.domain.repository.AuthRepository
-import com.example.hearme.domain.usecase.AuthUseCase
 import com.example.hearme.presentation.component.AuthInputText
 import com.example.hearme.presentation.component.LoginByButton
 import com.example.hearme.presentation.component.MainButton
 import com.example.hearme.ui.theme.*
+import com.example.hearme.ui.theme.Typography
 
 @Composable
 fun LoginScreen(
@@ -42,15 +41,15 @@ fun LoginScreen(
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(VioletNormal, Color.White),
-                    startY = 0f,
-                    endY = 600f
+                    startY = 100f,
+                    endY = 700f
                 )
             )
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 20.dp, vertical = 100.dp),
+                .padding(horizontal = 20.dp, vertical = 150.dp),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -60,7 +59,7 @@ fun LoginScreen(
             ) {
                 Text(
                     text = "Selamat Datang",
-                    style = Typography.titleLarge,
+                    style = Typography.titleLarge.copy(fontSize = 24.sp),
                     textAlign = TextAlign.Center
                 )
 

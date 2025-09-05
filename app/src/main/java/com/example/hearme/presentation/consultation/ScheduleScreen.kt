@@ -16,20 +16,35 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hearme.R
+import com.example.hearme.domain.model.ConsultDomain
 import com.example.hearme.domain.model.DoctorDomain
 import com.example.hearme.presentation.component.*
 import com.example.hearme.ui.theme.Typography
+import java.util.Locale
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.UUID
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ScheduleScreen(
     navController: NavController,
     doctor: DoctorDomain,
-    onBackClick: () -> Unit = {navController.popBackStack()}
+    onBackClick: () -> Unit = { navController.popBackStack() }
 ) {
     var selectedDate by remember { mutableStateOf("Hari ini") }
     var selectedTime by remember { mutableStateOf("09.00") }
     var isQrisChecked by remember { mutableStateOf(false) }
+
+    val today = LocalDate.now()
+    val formatter = DateTimeFormatter.ofPattern("EEE d MMM", Locale("id", "ID"))
+
+    val dates = (0..3).map { offset ->
+        when (offset) {
+            0 -> "Hari ini"
+            else -> today.plusDays(offset.toLong()).format(formatter)
+        }
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -50,7 +65,19 @@ fun ScheduleScreen(
                 MainButton(
                     text = "Lanjut Pembayaran",
                     onClick = {
-                        navController.navigate("payment")
+                        val consult = ConsultDomain(
+                            cid = UUID.randomUUID().toString(),
+                            did = doctor.did,
+                            dName = doctor.dName,
+                            clinic = doctor.clinic,
+                            date = selectedDate,
+                            time = selectedTime,
+                            payment = "QRIS"
+                        )
+
+                        navController.navigate(
+                            "payment/${doctor.did}/${consult.cid}/${consult.date}/${consult.time}/${consult.payment}"
+                        )
                     }
                 )
             }
@@ -60,7 +87,7 @@ fun ScheduleScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+                .padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             DoctorCardHorizontal(
@@ -68,12 +95,12 @@ fun ScheduleScreen(
                 onClick = {}
             )
 
-            Text("Pilih tanggal konsultasi", style = Typography.titleSmall)
+            // Pilih tanggal
+            Text("Pilih tanggal konsultasi", style = Typography.titleMedium)
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                val dates = listOf("Hari ini", "Jum 5 Sept", "Sab 6 Sept", "Min 7 Sept")
                 dates.forEach { date ->
                     DateButton(
                         value = date,
@@ -83,7 +110,8 @@ fun ScheduleScreen(
                 }
             }
 
-            Text("Pilih waktu konsultasi", style = Typography.titleSmall)
+            // Pilih waktu
+            Text("Pilih waktu konsultasi", style = Typography.titleMedium)
             val times = listOf("09.00", "10.00", "11.00", "12.00", "13.00", "14.00", "15.00")
             FlowRow(
                 maxItemsInEachRow = 4,
@@ -100,7 +128,8 @@ fun ScheduleScreen(
                 }
             }
 
-            Text("Pilih metode pembayaran", style = Typography.titleSmall)
+            // Pilih metode pembayaran
+            Text("Pilih metode pembayaran", style = Typography.titleMedium)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -149,7 +178,7 @@ fun ScheduleScreenPreview() {
         city = "Jakarta Timur",
         education = listOf("S.Psi - UI", "Sp.KJ - UGM"),
         dPhoneNumber = "08123456789",
-        photo = "https://i.imgur.com/mwL6QF5.jpeg"
+        photo = R.drawable.doctor_1
     )
     ScheduleScreen(navController, doctorDummy)
 }

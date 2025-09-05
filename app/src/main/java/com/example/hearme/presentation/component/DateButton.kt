@@ -43,7 +43,7 @@ fun DateButton(
     ) {
         Text(
             text = value,
-            style = Typography.labelMedium.copy(color = textColor),
+            style = Typography.labelLarge.copy(color = textColor),
             textAlign = TextAlign.Center
         )
     }

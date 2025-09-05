@@ -23,64 +23,10 @@ import com.example.hearme.ui.theme.Typography
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConsultationScreen(
+    doctors: List<DoctorDomain>,
     navController: NavController,
     currentRoute: String = "consultation",
 ) {
-    val doctors = listOf(
-        DoctorDomain(
-            did = "1",
-            dName = "dr. Tirta, S.Psi",
-            specialist = "Psikiater",
-            rating = 4.5,
-            experience = 5,
-            clinic = "Sehat Jiwa Clinic",
-            address = "Jl. Kebon Jeruk No. 12",
-            city = "Jakarta Timur",
-            education = listOf("S.Psi - UI", "Sp.KJ - UGM"),
-            dPhoneNumber = "08123456789",
-            photo = ""
-        ),
-        DoctorDomain(
-            did = "2",
-            dName = "dr. Sinta, Sp.KJ",
-            specialist = "Psikiater",
-            rating = 4.8,
-            experience = 7,
-            clinic = "Mental Health Center",
-            address = "Jl. Merdeka No. 8",
-            city = "Jakarta Barat",
-            education = listOf("S.Psi - UNAIR", "Sp.KJ - UI"),
-            dPhoneNumber = "08234567890",
-            photo = ""
-        ),
-        DoctorDomain(
-            did = "3",
-            dName = "dr. Andi, S.Psi",
-            specialist = "Psikolog Klinis",
-            rating = 4.6,
-            experience = 4,
-            clinic = "MindCare Clinic",
-            address = "Jl. Sudirman No. 5",
-            city = "Tangerang",
-            education = listOf("S.Psi - UGM"),
-            dPhoneNumber = "08345678901",
-            photo = ""
-        ),
-        DoctorDomain(
-            did = "4",
-            dName = "dr. Maya, S.Psi",
-            specialist = "Psikolog Anak",
-            rating = 4.7,
-            experience = 6,
-            clinic = "Happy Mind Center",
-            address = "Jl. Diponegoro No. 10",
-            city = "Jakarta Selatan",
-            education = listOf("S.Psi - Undip", "M.Psi - UI"),
-            dPhoneNumber = "08456789012",
-            photo = ""
-        )
-    )
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color.White,
@@ -128,7 +74,7 @@ fun ConsultationScreen(
                 DoctorCard(
                     doctor = doctor,
                     onClick = {
-                        navController.navigate("doctorDetail")
+                        navController.navigate("doctorDetail/${doctor.did}")
                     }
                 )
             }
@@ -136,9 +82,9 @@ fun ConsultationScreen(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ConsultationScreenPreview() {
-    val navController = rememberNavController()
-    ConsultationScreen(navController)
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun ConsultationScreenPreview() {
+//    val navController = rememberNavController()
+//    ConsultationScreen(navController)
+//}

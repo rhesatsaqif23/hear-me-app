@@ -19,7 +19,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.example.hearme.R
 import com.example.hearme.domain.model.ConsultDomain
 import com.example.hearme.domain.model.DoctorDomain
@@ -44,28 +43,19 @@ fun ConsultCard(
             .padding(10.dp)
     ) {
         Row(
-            modifier = Modifier.height(90.dp),
+            modifier = Modifier.height(100.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-//        AsyncImage(
-//            model = doctor.photo,
-//            contentDescription = "Foto Dokter",
-//            contentScale = ContentScale.Crop,
-//            modifier = Modifier
-//                .size(90.dp)
-//                .clip(RoundedCornerShape(8.dp))
-//        )
-
             Image(
-                painter = painterResource(id = R.drawable.doctor_placeholder),
+                painter = painterResource(id = doctor.photo),
                 contentDescription = "Foto Dokter",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(90.dp)
+                    .size(100.dp)
                     .clip(RoundedCornerShape(16.dp))
             )
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(10.dp))
 
             Column(
                 modifier = Modifier
@@ -76,7 +66,7 @@ fun ConsultCard(
                 Column {
                     Text(
                         text = doctor.dName,
-                        style = Typography.labelLarge,
+                        style = Typography.titleSmall,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -85,7 +75,7 @@ fun ConsultCard(
 
                     Text(
                         text = doctor.specialist,
-                        style = Typography.labelMedium,
+                        style = Typography.labelLarge,
                         color = Color.Gray,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
@@ -105,7 +95,7 @@ fun ConsultCard(
                 ) {
                     Text(
                         text = doctor.city,
-                        style = Typography.labelMedium,
+                        style = Typography.labelLarge,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         color = Color.Gray
@@ -122,7 +112,7 @@ fun ConsultCard(
                             Spacer(modifier = Modifier.width(2.dp))
                             Text(
                                 text = doctor.rating.toString(),
-                                style = Typography.labelMedium
+                                style = Typography.labelLarge
                             )
                         }
 
@@ -138,7 +128,7 @@ fun ConsultCard(
                             Spacer(modifier = Modifier.width(2.dp))
                             Text(
                                 text = "${doctor.experience} tahun",
-                                style = Typography.labelMedium
+                                style = Typography.labelLarge
                             )
                         }
                     }
@@ -147,14 +137,14 @@ fun ConsultCard(
 
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
                 text = "Konsultasi pada",
-                style = Typography.labelLarge
+                style = Typography.titleSmall
             )
             Spacer(modifier = Modifier.height(4.dp))
 
@@ -163,12 +153,12 @@ fun ConsultCard(
                     painter = painterResource(id = R.drawable.ic_calendar),
                     contentDescription = "Tanggal",
                     tint = Color.Black,
-                    modifier = Modifier.size(16.dp)
+                    modifier = Modifier.size(20.dp)
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(10.dp))
                 Text(
                     text = consult.date,
-                    style = Typography.labelMedium,
+                    style = Typography.labelLarge,
                     color = Color.Gray
                 )
             }
@@ -180,12 +170,12 @@ fun ConsultCard(
                     painter = painterResource(id = R.drawable.ic_clock),
                     contentDescription = "Jam",
                     tint = Color.Black,
-                    modifier = Modifier.size(16.dp)
+                    modifier = Modifier.size(20.dp)
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(10.dp))
                 Text(
                     text = consult.time,
-                    style = Typography.labelMedium,
+                    style = Typography.labelLarge,
                     color = Color.Gray
                 )
             }
@@ -197,12 +187,12 @@ fun ConsultCard(
                     painter = painterResource(id = R.drawable.ic_clinic),
                     contentDescription = "Klinik",
                     tint = Color.Black,
-                    modifier = Modifier.size(16.dp)
+                    modifier = Modifier.size(20.dp)
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(10.dp))
                 Text(
                     text = consult.clinic,
-                    style = Typography.labelMedium,
+                    style = Typography.labelLarge,
                     color = Color.Gray
                 )
             }
@@ -224,13 +214,13 @@ fun ConsultCardPreview() {
         city = "Jakarta Timur",
         education = listOf("S.Psi - UI", "Sp.KJ - UGM"),
         dPhoneNumber = "08123456789",
-        photo = "https://i.imgur.com/mwL6QF5.jpeg"
+        photo = R.drawable.doctor_1
     )
 
     val consultDummy = ConsultDomain(
         cid = "1",
         did = "1",
-        uid = "123",
+        dName = "dr. Tirta, S.Psi",
         date = "Jumat, 5 September 2025",
         time = "11.00 WIB",
         payment = "BPJS",

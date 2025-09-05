@@ -21,7 +21,7 @@ import com.example.hearme.data.model.QuestionSectionData
 @Composable
 fun QuestionScreen(
     navController: NavController,
-    currentRoute: String = "question"
+    currentRoute: String = "voiceRecord"
 ) {
     val questionSections = listOf(
         QuestionSectionData(
@@ -118,7 +118,9 @@ fun QuestionScreen(
 
             MainButton(
                 text = "Simpan",
-                onClick = {}
+                onClick = {
+                    navController.navigate("summary")
+                }
             )
         }
     }

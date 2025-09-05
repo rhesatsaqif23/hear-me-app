@@ -3,7 +3,6 @@ package com.example.hearme.presentation.consultation
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
@@ -40,12 +39,12 @@ fun DoctorDetailScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(20.dp)
+                    .padding(start = 20.dp, end = 20.dp, top = 0.dp, bottom = 20.dp)
             ) {
                 MainButton(
                     text = "Jadwalkan Konsultasi",
                     onClick = {
-                        navController.navigate("schedule")
+                        navController.navigate("schedule/${doctor.did}")
                     }
                 )
             }
@@ -55,12 +54,11 @@ fun DoctorDetailScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(innerPadding)
+                .padding(bottom = innerPadding.calculateBottomPadding())
         ) {
-            // Foto dokter + TopBar overlay
             Box {
                 Image(
-                    painter = painterResource(id = R.drawable.doctor_placeholder),
+                    painter = painterResource(id = doctor.photo),
                     contentDescription = "Foto Dokter",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -73,11 +71,9 @@ fun DoctorDetailScreen(
                     onBackClick = onBackClick,
                     modifier = Modifier
                         .align(Alignment.TopStart)
-                        .padding(top = 16.dp)
                 )
             }
 
-            // Konten detail dokter
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -86,13 +82,11 @@ fun DoctorDetailScreen(
                 Column(
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    // Nama dokter
                     Text(
                         text = doctor.dName,
                         style = Typography.titleLarge,
                         color = Color.Black
                     )
-                    // Specialist + rating + experience
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
@@ -100,7 +94,7 @@ fun DoctorDetailScreen(
                     ) {
                         Text(
                             text = doctor.specialist,
-                            style = Typography.bodyLarge,
+                            style = Typography.titleMedium,
                             color = Color.Gray
                         )
                         Row(
@@ -117,7 +111,7 @@ fun DoctorDetailScreen(
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
                                     text = doctor.rating.toString(),
-                                    style = Typography.labelLarge,
+                                    style = Typography.bodyLarge,
                                     color = Color.Black
                                 )
                             }
@@ -131,7 +125,7 @@ fun DoctorDetailScreen(
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
                                     text = "${doctor.experience} tahun",
-                                    style = Typography.labelLarge,
+                                    style = Typography.bodyLarge,
                                     color = Color.Black
                                 )
                             }
@@ -142,28 +136,27 @@ fun DoctorDetailScreen(
                     Divider(thickness = 1.dp, color = Color.Black)
                     Spacer(modifier = Modifier.height(2.dp))
 
-                    // Klinik
                     Text(
                         text = doctor.clinic,
-                        style = Typography.bodyLarge,
+                        style = Typography.titleMedium,
                         color = Color.Black
                     )
                     Text(
                         text = "${doctor.address}, ${doctor.city}",
-                        style = Typography.labelLarge,
+                        style = Typography.bodyLarge,
                         color = Color.Gray
                     )
 
-                    // Riwayat Pendidikan
                     Text(
                         text = "Riwayat Pendidikan",
-                        style = Typography.bodyLarge,
+                        style = Typography.titleMedium,
                         color = Color.Black
                     )
+
                     doctor.education.forEach { edu ->
                         Text(
                             text = edu,
-                            style = Typography.labelLarge,
+                            style = Typography.bodyLarge,
                             color = Color.Gray
                         )
                     }
@@ -191,7 +184,7 @@ fun DoctorDetailScreenPreview() {
             "S1 – Kedokteran, Universitas Indonesia"
         ),
         dPhoneNumber = "08123456789",
-        photo = "https://i.imgur.com/mwL6QF5.jpeg"
+        photo = R.drawable.doctor_1
     )
     DoctorDetailScreen(navController, doctorDummy)
 }

@@ -1,6 +1,7 @@
 package com.example.hearme.presentation.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Badge
@@ -17,7 +18,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hearme.R
 import com.example.hearme.ui.theme.Typography
-import com.example.hearme.ui.theme.VioletNormal
 
 @Composable
 fun TopBarHome(
@@ -28,7 +28,8 @@ fun TopBarHome(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(20.dp),
+            .background(Color.Transparent)
+            .padding(vertical = 24.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -47,12 +48,12 @@ fun TopBarHome(
                 Text(
                     text = "Halo,",
                     style = Typography.bodyLarge,
-                    color = Color.Black
+                    color = Color.White
                 )
                 Text(
                     text = name,
                     style = Typography.bodyLarge,
-                    color = Color.Black
+                    color = Color.White
                 )
             }
         }
@@ -75,14 +76,14 @@ fun TopBarHome(
             Icon(
                 painter = painterResource(id = R.drawable.ic_notif),
                 contentDescription = "Notifikasi",
-                tint = VioletNormal,
+                tint = Color.White,
                 modifier = Modifier.size(36.dp)
             )
         }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = false)
 @Composable
 fun TopBarHomePreview() {
     TopBarHome(

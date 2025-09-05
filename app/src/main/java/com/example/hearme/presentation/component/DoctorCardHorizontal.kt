@@ -19,7 +19,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.style.TextOverflow
-import coil.compose.AsyncImage
 import com.example.hearme.R
 import com.example.hearme.domain.model.DoctorDomain
 import com.example.hearme.ui.theme.Typography
@@ -35,7 +34,7 @@ fun DoctorCardHorizontal(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(100.dp)
+            .height(110.dp)
             .shadow(elevation = 6.dp, shape = RoundedCornerShape(10.dp))
             .clip(RoundedCornerShape(10.dp))
             .background(Color.White)
@@ -43,17 +42,8 @@ fun DoctorCardHorizontal(
             .padding(6.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-//        AsyncImage(
-//            model = doctor.photo,
-//            contentDescription = "Foto Dokter",
-//            contentScale = ContentScale.Crop,
-//            modifier = Modifier
-//                .size(90.dp)
-//                .clip(RoundedCornerShape(8.dp))
-//        )
-
         Image(
-            painter = painterResource(id = R.drawable.doctor_placeholder),
+            painter = painterResource(id = doctor.photo),
             contentDescription = "Foto Dokter",
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -70,7 +60,7 @@ fun DoctorCardHorizontal(
             Column {
                 Text(
                     text = doctor.dName,
-                    style = Typography.labelLarge,
+                    style = Typography.titleSmall,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -79,7 +69,7 @@ fun DoctorCardHorizontal(
 
                 Text(
                     text = doctor.specialist,
-                    style = Typography.labelMedium,
+                    style = Typography.labelLarge,
                     color = Color.Gray,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -99,7 +89,7 @@ fun DoctorCardHorizontal(
             ) {
                 Text(
                     text = doctor.city,
-                    style = Typography.labelMedium,
+                    style = Typography.labelLarge,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     color = Color.Gray
@@ -116,7 +106,7 @@ fun DoctorCardHorizontal(
                         Spacer(modifier = Modifier.width(2.dp))
                         Text(
                             text = doctor.rating.toString(),
-                            style = Typography.labelMedium
+                            style = Typography.labelLarge
                         )
                     }
 
@@ -132,7 +122,7 @@ fun DoctorCardHorizontal(
                         Spacer(modifier = Modifier.width(2.dp))
                         Text(
                             text = "${doctor.experience} tahun",
-                            style = Typography.labelMedium
+                            style = Typography.labelLarge
                         )
                     }
                 }
@@ -155,7 +145,7 @@ fun DoctorCardHorizontalPreview() {
         city = "Jakarta Timur",
         education = listOf("S.Psi - UI", "Sp.KJ - UGM"),
         dPhoneNumber = "08123456789",
-        photo = "https://i.imgur.com/mwL6QF5.jpeg"
+        photo = R.drawable.doctor_1
     )
     DoctorCardHorizontal(
         doctor = doctorDummy,

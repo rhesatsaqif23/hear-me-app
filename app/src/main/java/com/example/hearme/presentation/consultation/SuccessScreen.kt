@@ -9,6 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.hearme.R
 import com.example.hearme.domain.model.ConsultDomain
 import com.example.hearme.domain.model.DoctorDomain
 import com.example.hearme.presentation.component.*
@@ -17,8 +18,7 @@ import com.example.hearme.presentation.component.*
 fun SuccessScreen(
     navController: NavController,
     doctor: DoctorDomain,
-    consult: ConsultDomain,
-    onBackClick: () -> Unit = { navController.popBackStack() }
+    consult: ConsultDomain
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -26,7 +26,9 @@ fun SuccessScreen(
         topBar = {
             TopBar(
                 title = "Pembayaran Sukses",
-                onBackClick = onBackClick,
+                onBackClick = {
+                    navController.popBackStack("consultation", inclusive = false)
+                },
                 modifier = Modifier
             )
         },
@@ -49,7 +51,7 @@ fun SuccessScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+                .padding(horizontal = 20.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             ConsultCard(
@@ -75,13 +77,13 @@ fun SuccessScreenPreview() {
         city = "Jakarta Timur",
         education = listOf("S.Psi - UI", "Sp.KJ - UGM"),
         dPhoneNumber = "08123456789",
-        photo = "https://i.imgur.com/mwL6QF5.jpeg"
+        photo = R.drawable.doctor_1
     )
 
     val consultDummy = ConsultDomain(
         cid = "C001",
         did = "1",
-        uid = "U001",
+        dName = "dr. Tirta, S.Psi",
         date = "Jumat, 5 September 2025",
         time = "11.00 WIB",
         payment = "QRIS",
@@ -92,6 +94,5 @@ fun SuccessScreenPreview() {
         navController = rememberNavController(),
         doctor = doctorDummy,
         consult = consultDummy,
-        onBackClick = {}
     )
 }

@@ -90,7 +90,9 @@ fun VoiceRecordScreen(
 
             MainButton(
                 text = "Simpan",
-                onClick = {}
+                onClick = {
+                    navController.navigate("summary")
+                }
             )
         }
     }

@@ -20,12 +20,12 @@ val Typography = Typography(
     bodyMedium = TextStyle(
         fontFamily = plusjakartasans,
         fontWeight = FontWeight.Medium,
-        fontSize = 14.sp,
+        fontSize = 15.sp,
     ),
     bodySmall = TextStyle(
         fontFamily = plusjakartasans,
         fontWeight = FontWeight.Medium,
-        fontSize = 12.sp,
+        fontSize = 14.sp,
     ),
 
     // Title
@@ -54,11 +54,11 @@ val Typography = Typography(
     labelMedium = TextStyle(
         fontFamily = plusjakartasans,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 12.sp,
+        fontSize = 13.sp,
     ),
     labelSmall = TextStyle(
         fontFamily = plusjakartasans,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 10.sp,
+        fontSize = 12.sp,
     )
 )

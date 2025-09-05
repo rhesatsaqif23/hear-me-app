@@ -33,7 +33,7 @@ fun ProfileScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(20.dp),
+                .padding(horizontal = 20.dp, vertical = 32.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             // Info Pribadi
@@ -58,7 +58,7 @@ fun ProfileScreen(
 
                 ProfileMenu(
                     icon = R.drawable.ic_password,
-                    value = "Ubah kata sandi",
+                    value = "Ubah Kata Sandi",
                     isTindakan = false, onClick = {
                         navController.navigate("changePassword")
                     }

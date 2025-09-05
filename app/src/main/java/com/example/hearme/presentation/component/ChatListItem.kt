@@ -14,7 +14,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.example.hearme.R
 import com.example.hearme.domain.model.DoctorDomain
 import com.example.hearme.ui.theme.Typography
@@ -34,35 +33,24 @@ fun ChatListItem(
             .padding(horizontal = 12.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Foto profil
-//        AsyncImage(
-//            model = doctor.photo,
-//            contentDescription = "Foto ${doctor.dName}",
-//            contentScale = ContentScale.Crop,
-//            modifier = Modifier
-//                .size(60.dp)
-//                .clip(CircleShape)
-//        )
-
         Image(
             painter = painterResource(id = R.drawable.doctor_placeholder),
             contentDescription = "Foto Dokter",
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(60.dp)
+                .size(65.dp)
                 .clip(CircleShape)
         )
 
         Spacer(modifier = Modifier.width(16.dp))
 
-        // Nama + pesan terakhir
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.Center
         ) {
             Text(
                 text = doctor.dName,
-                style = Typography.titleSmall,
+                style = Typography.titleMedium,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -104,7 +92,7 @@ fun ChatListItemPreview() {
         city = "Jakarta Timur",
         education = listOf("S.Psi - UI", "Sp.KJ - UGM"),
         dPhoneNumber = "08123456789",
-        photo = "https://i.imgur.com/mwL6QF5.jpeg"
+        photo = R.drawable.doctor_1
     )
 
     ChatListItem(
